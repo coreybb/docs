@@ -11,7 +11,7 @@ This document provides a detailed overview of the `cases` collection, its fields
 
 ## Full Entity-Relationship Diagram
 
-```mermaid
+<div class="mermaid">
 erDiagram
     %% Main Case Collection
     Cases {
@@ -97,3 +97,4 @@ erDiagram
     Cases ||--o{ Teams : "visible to teams"
     Activity }|--|| Content : "references content"
     ContentRequests }|--|| Content : "references single content"
+</div>
