@@ -5,24 +5,13 @@ layout: default
 
 # Firestore Cases Model
 
-This document provides a comprehensive overview of the `cases` collection, its fields, subcollections, relationships, and internal objects.
-
----
-
-## Overview of `cases`
-
-The `cases` collection is the core of the system, representing individual medical cases. Each document in `cases` contains the following:
-
-- **Metadata**: Information such as the case name, status, and creation details.
-- **Relationships**: Links to users, teams, and other cases.
-- **Embedded Objects**: Summarized data (e.g., `contentCounts`) and state flags (e.g., `contentSecondaryStatuses`).
-- **Subcollections**: Associated data for activity, content, and content requests.
+This document provides a detailed overview of the `cases` collection, its fields, subcollections, and related entities.
 
 ---
 
 ## Full Entity-Relationship Diagram
 
-<div class="mermaid">
+```mermaid
 erDiagram
     %% Main Case Collection
     Cases {
@@ -108,4 +97,3 @@ erDiagram
     Cases ||--o{ Teams : "visible to teams"
     Activity }|--|| Content : "references content"
     ContentRequests }|--|| Content : "references single content"
-</div>
