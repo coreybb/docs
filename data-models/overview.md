@@ -3,7 +3,8 @@
 ## Core Models
 
 ### Case
-The main container for all content and activity.
+The main container for all content and activity. 
+[Model](cases.md).
 
 ### Content
 Individual pieces of content within a case.
