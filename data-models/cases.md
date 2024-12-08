@@ -9,9 +9,8 @@ This document provides a detailed overview of the `cases` collection, its fields
 
 ---
 
-## Full Entity-Relationship Diagram
-
 <div class="mermaid">
+## Full Entity-Relationship Diagram
 erDiagram
     %% Main Case Collection
     Cases {
@@ -55,6 +54,15 @@ erDiagram
         array visibleToTeamRefs
     }
 
+    %% Embedded Object: Content Data
+    ContentData {
+        string body
+        string bodyOriginal
+        array bodySections
+        object deltaBody
+        object bodySectionsOriginal
+    }
+
     %% Subcollection: Content Requests
     ContentRequests {
         string id
@@ -96,5 +104,6 @@ erDiagram
     Cases ||--o{ ContentRequests : "owns"
     Cases ||--o{ Teams : "visible to teams"
     Activity }|--|| Content : "references content"
+    Content }|--o{ ContentData : "contains detailed data"
     ContentRequests }|--|| Content : "references single content"
 </div>
