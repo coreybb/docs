@@ -1,4 +1,5 @@
 markdown: GFM
+theme: jekyll-theme-primer
 mermaid:
   version: "9.4.3"
 
