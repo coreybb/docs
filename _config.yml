@@ -1,3 +1,4 @@
-markdown: GFM
-mermaid: true
-
+title: CoVet Documentation
+description: Developer guides and technical documentation.
+markdown: kramdown
+theme: minima

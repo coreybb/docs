@@ -1,6 +1,11 @@
-# CoVet Documentation
+---
+title: Welcome
+layout: default
+---
 
-Welcome to the CoVet documentation.
+# Covet Documentation
+
+Welcome to CoVet's documentation hub! 
 
 ## Data Model Overview
 
@@ -15,7 +20,7 @@ erDiagram
     ContentRequest }|--|| User : "requested by"
 </div>
 
-## Documentation Sections
+## Sections
 
 - [Data Models](./data-models/overview.md)
 
