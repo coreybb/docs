@@ -4,7 +4,7 @@ Welcome to the Covet documentation.
 
 ## Data Model Overview
 
-<div_class="mermaid">
+```mermaid
 erDiagram
     Case ||--o{ Content : has
     Case ||--o{ Activity : has
@@ -13,7 +13,7 @@ erDiagram
     Case }|--|| User : "owned by"
     Activity }|--|| User : "created by"
     ContentRequest }|--|| User : "requested by"
-</div>
+```
 
 ## Documentation Sections
 
