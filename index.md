@@ -1,10 +1,10 @@
-# Covet Documentation
+# CoVet Documentation
 
-Welcome to the Covet documentation.
+Welcome to the CoVet documentation.
 
 ## Data Model Overview
 
-```mermaid
+<div class="mermaid">
 erDiagram
     Case ||--o{ Content : has
     Case ||--o{ Activity : has
@@ -13,7 +13,7 @@ erDiagram
     Case }|--|| User : "owned by"
     Activity }|--|| User : "created by"
     ContentRequest }|--|| User : "requested by"
-```
+</div>
 
 ## Documentation Sections
 
