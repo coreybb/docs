@@ -5,10 +5,11 @@ layout: default
 
 # Firestore Cases Model
 
-This diagram provides an overview of the `cases` collection and its relationships to subcollections (`activity`, `content`, `contentRequests`).
+This diagram provides a comprehensive overview of the `cases` collection, its fields, subcollections, relationships, and internal objects.
 
-<div class="mermaid">
+```mermaid
 erDiagram
+    %% Main Case Collection
     Cases {
         string id
         string name
@@ -24,6 +25,7 @@ erDiagram
         array visibleToTeamRefs
     }
 
+    %% Subcollection: Activity
     Activity {
         string id
         string activityType
@@ -36,6 +38,7 @@ erDiagram
         string status
     }
 
+    %% Subcollection: Content
     Content {
         string id
         string caseName
@@ -48,6 +51,7 @@ erDiagram
         array visibleToTeamRefs
     }
 
+    %% Subcollection: Content Requests
     ContentRequests {
         string id
         string type
@@ -59,9 +63,33 @@ erDiagram
         ref userRef
     }
 
-    Cases ||--o{ Activity : "has activity"
-    Cases ||--o{ Content : "contains"
-    Cases ||--o{ ContentRequests : "requests"
-    Activity }|--|| Content : "references"
+    %% Embedded Object: Content Counts
+    ContentCounts {
+        int emails
+        int images
+        int pdfs
+        int recordings
+        int records
+        int summaries
+    }
+
+    %% Embedded Object: Content Secondary Statuses
+    ContentSecondaryStatuses {
+        boolean allInputsProcessed
+    }
+
+    %% Teams Collection
+    Teams {
+        string id
+        string name
+    }
+
+    %% Relationships
+    Cases ||--o{ ContentCounts : "tracks counts"
+    Cases ||--o{ ContentSecondaryStatuses : "tracks statuses"
+    Cases ||--o{ Activity : "owns"
+    Cases ||--o{ Content : "owns"
+    Cases ||--o{ ContentRequests : "owns"
+    Cases ||--o{ Teams : "visible to teams"
+    Activity }|--|| Content : "references content"
     ContentRequests }|--|| Content : "references single content"
-</div>
