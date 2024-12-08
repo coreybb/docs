@@ -22,6 +22,7 @@
             background-color: var(--background-color);
             margin: 0;
             padding: 0;
+            transition: background-color 0.3s, color 0.3s;
         }
         header {
             text-align: center;
@@ -65,6 +66,25 @@
             background-color: #fff;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+        body.dark {
+            --background-color: #1d1d1f;
+            --text-color: #f5f5f7;
+            --primary-color: #0a84ff;
+        }
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: white;
+            transition: transform 0.3s;
+        }
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body>
@@ -80,9 +100,24 @@
             {% endfor %}
         </ul>
     </nav>
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
 </header>
 <div class="container">
     {{ content }}
 </div>
+<script>
+    // Handle dark mode toggle and persistence in localStorage
+    const toggleButton = document.getElementById('theme-toggle');
+    const isDarkMode = localStorage.getItem('theme') === 'dark';
+    if (isDarkMode) document.body.classList.add('dark');
+
+    toggleButton.addEventListener('click', () => {
+        document.body.classList.toggle('dark');
+        localStorage.setItem(
+            'theme',
+            document.body.classList.contains('dark') ? 'dark' : 'light'
+        );
+    });
+</script>
 </body>
 </html>
