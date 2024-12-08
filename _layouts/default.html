@@ -6,7 +6,18 @@
     <title>{{ page.title }}</title>
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <script>
-        mermaid.initialize({ startOnLoad: true });
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: "base",
+            themeVariables: {
+                primaryColor: "#2a9d8f",
+                edgeLabelBackground: "#e9c46a",
+                nodeBorder: "#264653",
+                clusterBkg: "#f4a261",
+                fontSize: "16px",
+                fontFamily: "Arial, sans-serif"
+            }
+        });
     </script>
 </head>
 <body>
