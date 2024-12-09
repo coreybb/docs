@@ -13,70 +13,35 @@ This document provides a detailed overview of the `cases` collection, its fields
 
 <div class="mermaid">
 erDiagram
-    %% Main Case Collection
     Cases {
         string id
-        string name
-        string status
+        string appVersion
         boolean archived
-        object contentCounts
-        object contentSecondaryStatuses
+        boolean changedName
         datetime createdDate
+        datetime lastModified
+        string name
+        string suggestedCaseName
+        boolean deleted
+        boolean generatedAnyContent
+        boolean hasMedicalInformation
+        boolean hiddenToDelete
+        int status
+        int timerValue
         ref createdBy
+        string createdByName
         ref ownedBy
+        string ownedByName
         ref nextCase
         ref previousCase
         array visibleToTeamRefs
     }
 
-    %% Subcollection: Activity
-    Activity {
-        string id
-        string activityType
-        ref contentRef
-        string contentType
-        ref userRef
-        datetime createdDate
-        array message
-        boolean processByBackend
-        string status
+    CollaborativeData {
+        array activeRecorders
+        boolean hasActiveRecorder
     }
 
-    %% Subcollection: Content
-    Content {
-        string id
-        string caseName
-        object contentData
-        ref createdBy
-        datetime createdDate
-        boolean hasMedicalInformation
-        string name
-        string type
-        array visibleToTeamRefs
-    }
-
-    %% Embedded Object: Content Data
-    ContentData {
-        string body
-        string bodyOriginal
-        array bodySections
-        object deltaBody
-        object bodySectionsOriginal
-    }
-
-    %% Subcollection: Content Requests
-    ContentRequests {
-        string id
-        string type
-        ref singleContent
-        array templates
-        string status
-        boolean usedAllContentsInCase
-        datetime createdDate
-        ref userRef
-    }
-
-    %% Embedded Object: Content Counts
     ContentCounts {
         int emails
         int images
@@ -86,26 +51,125 @@ erDiagram
         int summaries
     }
 
-    %% Embedded Object: Content Secondary Statuses
     ContentSecondaryStatuses {
         boolean allInputsProcessed
     }
 
-    %% Teams Collection
+    VisibleToTeamData {
+        string teamName
+        ref teamRef
+    }
+
+    Activity {
+        string id
+        string activityType
+        ref contentRef
+        string contentType
+        string createdByName
+        datetime createdDate
+        array message
+        boolean processByBackend
+        string status
+        ref userRef
+    }
+
+    ActivityMessage {
+        string languageCode
+        string string
+    }
+
+    Content {
+        string id
+        string appVersion
+        datetime caseCreatedDate
+        string caseName
+        boolean changedName
+        object contentData
+        ref contentRequest
+        ref createdBy
+        string createdByName
+        datetime createdDate
+        int executionTime
+        boolean hasCompleted
+        boolean hasMedicalInformation
+        array inputContentReferences
+        boolean isMultiPet
+        string languageCode
+        datetime lastProcessingTime
+        string name
+        ref ownedBy
+        string ownedByName
+        boolean showInExportCenter
+        int status
+        string type
+        boolean usedAllContentsInCase
+        array visibleToTeamRefs
+    }
+
+    ContentData {
+        string body
+        string bodyOriginal
+        array bodySections
+        array bodySectionsOriginal
+        string originalGeneratedBody
+        ref templateUsed
+        object recording
+    }
+
+    BodySection {
+        string body
+        string deltaBody
+        int order
+        string title
+    }
+
+    Recording {
+        string detectedLanguage
+        string downloadURL
+        float duration
+        string formattedTranscript
+        string platform
+        string selectedLanguage
+        string storageReference
+        string transcript
+    }
+
+    ContentRequests {
+        string appVersion
+        datetime createdDate
+        array inputContentReferences
+        boolean isMultiPet
+        string languageCode
+        ref singleContent
+        string status
+        array templates
+        string type
+        boolean usedAllContentsInCase
+        ref userRef
+    }
+
     Teams {
         string id
         string name
     }
 
-    %% Relationships
-    Cases ||--o{ ContentCounts : "tracks counts"
-    Cases ||--o{ ContentSecondaryStatuses : "tracks statuses"
-    Cases ||--o{ Activity : "owns"
-    Cases ||--o{ Content : "owns"
-    Cases ||--o{ ContentRequests : "owns"
-    Cases ||--o{ Teams : "visible to teams"
-    Activity }|--|| Content : "references content"
-    Content }|--o{ ContentData : "contains detailed data"
-    ContentRequests ||--o{ Content : "references single content"
+    Cases ||--|| CollaborativeData : "has"
+    Cases ||--|| ContentCounts : "has"
+    Cases ||--|| ContentSecondaryStatuses : "has"
+    Cases ||--o{ VisibleToTeamData : "has"
+    Cases ||--o{ Activity : "contains"
+    Cases ||--o{ Content : "contains"
+    Cases ||--o{ ContentRequests : "has"
+    Cases }o--o{ Teams : "visible to"
+    
+    Activity ||--o{ ActivityMessage : "contains"
+    Activity }|--|| Content : "references"
+    
+    Content ||--|| ContentData : "has"
+    ContentData ||--o{ BodySection : "contains"
+    ContentData ||--o{ Recording : "may have"
+    
+    Content }|--|| ContentRequests : "requested by"
+    ContentRequests }|--|| Teams : "visible to"
 
 </div>
