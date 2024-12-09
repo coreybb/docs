@@ -98,14 +98,14 @@ erDiagram
     }
 
     %% Relationships
-    Cases ||--o{ ContentCounts : "tracks counts";
-    Cases ||--o{ ContentSecondaryStatuses : "tracks statuses";
-    Cases ||--o{ Activity : "owns";
-    Cases ||--o{ Content : "owns";
-    Cases ||--o{ ContentRequests : "owns";
-    Cases ||--o{ Teams : "visible to teams";
-    Activity }|--|| Content : "references content";
-    Content }|--o{ ContentData : "contains detailed data";
-    ContentRequests ||--o{ Content : "references single content";
+    Cases ||--o{ ContentCounts : "tracks counts"
+    Cases ||--o{ ContentSecondaryStatuses : "tracks statuses"
+    Cases ||--o{ Activity : "owns"
+    Cases ||--o{ Content : "owns"
+    Cases ||--o{ ContentRequests : "owns"
+    Cases ||--o{ Teams : "visible to teams"
+    Activity }|--|| Content : "references content"
+    Content }|--o{ ContentData : "contains detailed data"
+    ContentRequests ||--o{ Content : "references single content"
 
 </div>
