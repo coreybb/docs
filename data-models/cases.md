@@ -9,8 +9,9 @@ This document provides a detailed overview of the `cases` collection, its fields
 
 ---
 
-<div class="mermaid">
 ## Full Entity-Relationship Diagram
+
+<div class="mermaid">
 erDiagram
     %% Main Case Collection
     Cases {
@@ -97,13 +98,13 @@ erDiagram
     }
 
     %% Relationships
-    Cases ||--o{ ContentCounts : "tracks counts"
-    Cases ||--o{ ContentSecondaryStatuses : "tracks statuses"
-    Cases ||--o{ Activity : "owns"
-    Cases ||--o{ Content : "owns"
-    Cases ||--o{ ContentRequests : "owns"
-    Cases ||--o{ Teams : "visible to teams"
-    Activity }|--|| Content : "references content"
-    Content }|--o{ ContentData : "contains detailed data"
-    ContentRequests }|--|| Content : "references single content"
+    Cases ||--o{ ContentCounts : "tracks counts";
+    Cases ||--o{ ContentSecondaryStatuses : "tracks statuses";
+    Cases ||--o{ Activity : "owns";
+    Cases ||--o{ Content : "owns";
+    Cases ||--o{ ContentRequests : "owns";
+    Cases ||--o{ Teams : "visible to teams";
+    Activity }|--|| Content : "references content";
+    Content }|--o{ ContentData : "contains detailed data";
+    ContentRequests }|--|| Content : "references single content";
 </div>
