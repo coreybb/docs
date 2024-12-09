@@ -106,5 +106,6 @@ erDiagram
     Cases ||--o{ Teams : "visible to teams";
     Activity }|--|| Content : "references content";
     Content }|--o{ ContentData : "contains detailed data";
-    ContentRequests }|--|| Content : "references single content";
+    ContentRequests ||--o{ Content : "references single content";
+
 </div>
