@@ -18,22 +18,26 @@ erDiagram
         string appVersion
         boolean archived
         boolean changedName
+        object collaborativeData
+        object contentCounts
+        object contentSecondaryStatuses
+        ref createdBy
+        string createdByName
         datetime createdDate
-        datetime lastModified
-        string name
-        string suggestedCaseName
         boolean deleted
         boolean generatedAnyContent
         boolean hasMedicalInformation
         boolean hiddenToDelete
-        int status
-        int timerValue
-        ref createdBy
-        string createdByName
+        datetime lastModified
+        string name
+        ref nextCase
         ref ownedBy
         string ownedByName
-        ref nextCase
         ref previousCase
+        int status
+        string suggestedCaseName
+        int timerValue
+        array visibleToTeamDataType
         array visibleToTeamRefs
     }
 
@@ -55,13 +59,7 @@ erDiagram
         boolean allInputsProcessed
     }
 
-    VisibleToTeamData {
-        string teamName
-        ref teamRef
-    }
-
     Activity {
-        string id
         string activityType
         ref contentRef
         string contentType
@@ -79,17 +77,16 @@ erDiagram
     }
 
     Content {
-        string id
         string appVersion
         datetime caseCreatedDate
         string caseName
-        boolean changedName
         object contentData
         ref contentRequest
         ref createdBy
         string createdByName
         datetime createdDate
         int executionTime
+        int exportStatus
         boolean hasCompleted
         boolean hasMedicalInformation
         array inputContentReferences
@@ -114,6 +111,7 @@ erDiagram
         string originalGeneratedBody
         ref templateUsed
         object recording
+        boolean clearPdfStorageReference
     }
 
     BodySection {
@@ -148,19 +146,12 @@ erDiagram
         ref userRef
     }
 
-    Teams {
-        string id
-        string name
-    }
-
     Cases ||--|| CollaborativeData : "has"
     Cases ||--|| ContentCounts : "has"
     Cases ||--|| ContentSecondaryStatuses : "has"
-    Cases ||--o{ VisibleToTeamData : "has"
     Cases ||--o{ Activity : "contains"
     Cases ||--o{ Content : "contains"
-    Cases ||--o{ ContentRequests : "has"
-    Cases }o--o{ Teams : "visible to"
+    Cases ||--o{ ContentRequests : "contains"
     
     Activity ||--o{ ActivityMessage : "contains"
     Activity }|--|| Content : "references"
@@ -170,6 +161,4 @@ erDiagram
     ContentData ||--o{ Recording : "may have"
     
     Content }|--|| ContentRequests : "requested by"
-    ContentRequests }|--|| Teams : "visible to"
-
 </div>
