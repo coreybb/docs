@@ -6,7 +6,46 @@
     <title>{{ site.title }} | {{ page.title }}</title>
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <script>
-        mermaid.initialize({ startOnLoad: true });
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'neutral',
+            fontSize: 16,
+            themeVariables: {
+                // Main colors
+                'primaryColor': '#f5f5f7',
+                'primaryTextColor': '#1d1d1f',
+                'primaryBorderColor': '#e5e5e7',
+                'lineColor': '#86868b',
+
+                // Entity boxes
+                'nodeBorder': '1px',
+                'mainBkg': '#ffffff',
+                'nodeBkg': '#ffffff',
+                'clusterBkg': '#f5f5f7',
+                'clusterBorder': '#e5e5e7',
+
+                // Typography
+                'fontFamily': '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif',
+                'fontSize': '16px',
+
+                // Relationships
+                'labelBackground': '#ffffff',
+                'labelBorder': '#e5e5e7',
+                'labelTextColor': '#1d1d1f',
+
+                // Attributes
+                'attributeBackgroundColorOdd': '#ffffff',
+                'attributeBackgroundColorEven': '#f5f5f7'
+            },
+            er: {
+                useMaxWidth: true,
+                entityPadding: 15,
+                stroke: '#86868b',
+                fill: '#ffffff',
+                fontSize: 16,
+                labelBackground: '#ffffff'
+            }
+        });
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
@@ -29,6 +68,7 @@
             padding: 20px;
             background-color: var(--primary-color);
             color: white;
+            position: relative;
         }
         header h1 {
             margin: 0;
@@ -81,6 +121,7 @@
             font-size: 1.5rem;
             color: white;
             transition: transform 0.3s;
+            z-index: 100;
         }
         .theme-toggle:hover {
             transform: scale(1.1);
