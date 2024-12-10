@@ -6,57 +6,16 @@
     <title>{{ site.title }} | {{ page.title }}</title>
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            function initializeMermaid(isDark) {
-                mermaid.initialize({
-                    startOnLoad: true,
-                    theme: 'neutral',
-                    fontSize: 16,
-                    themeVariables: {
-                        // Colors
-                        'primaryColor': isDark ? '#292A2F' : '#f0f0f0',
-                        'primaryTextColor': isDark ? '#ffffff' : '#1d1d1f',
-                        'primaryBorderColor': isDark ? '#3f3f3f' : '#e5e5e7',
-                        'lineColor': isDark ? '#ffffff' : '#86868b',
-
-                        // Entity boxes
-                        'nodeBorder': '1px',
-                        'mainBkg': isDark ? '#292A2F' : '#f0f0f0',
-                        'nodeBkg': isDark ? '#292A2F' : '#f0f0f0',
-
-                        // Typography
-                        'fontFamily': '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif',
-                        'fontSize': '16px',
-
-                        // Attributes
-                        'attributeBackgroundColorOdd': isDark ? '#292A2F' : '#f0f0f0',
-                        'attributeBackgroundColorEven': isDark ? '#1d1d1f' : '#ffffff',
-                        'attributeTextColor': isDark ? '#ffffff' : '#1d1d1f'
-                    }
-                });
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'neutral',
+            fontSize: 16,
+            er: {
+                useMaxWidth: true,
+                entityPadding: 15,
+                fontSize: 16,
             }
-
-            const toggleButton = document.getElementById('theme-toggle');
-            const isDarkMode = localStorage.getItem('theme') === 'dark';
-
-            // Initial setup
-            if (isDarkMode) {
-                document.body.classList.add('dark');
-            }
-            initializeMermaid(isDarkMode);
-
-            // Theme toggle handler
-            toggleButton.addEventListener('click', () => {
-                document.body.classList.toggle('dark');
-                const isDark = document.body.classList.contains('dark');
-                localStorage.setItem('theme', isDark ? 'dark' : 'light');
-
-                // Re-initialize Mermaid with new theme
-                initializeMermaid(isDark);
-                mermaid.init();
-            });
         });
-
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
@@ -64,6 +23,12 @@
             --background-color: #f0f0f0;
             --text-color: #333;
             --primary-color: #1696E6;
+
+            /* Mermaid specific colors */
+            --mermaid-bg: #f0f0f0;
+            --mermaid-text: #1d1d1f;
+            --mermaid-border: #e5e5e7;
+            --mermaid-alt-bg: #ffffff;
         }
 
         body {
@@ -125,16 +90,44 @@
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 8px;
-            background-color: var(--background-color);
+            background-color: var(--mermaid-bg);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             overflow-x: auto;
             max-width: 100%;
+        }
+
+        /* Mermaid specific styles */
+        .mermaid .entityBox {
+            fill: var(--mermaid-bg) !important;
+            stroke: var(--mermaid-border) !important;
+        }
+
+        .mermaid .attributeBoxOdd {
+            fill: var(--mermaid-bg) !important;
+        }
+
+        .mermaid .attributeBoxEven {
+            fill: var(--mermaid-alt-bg) !important;
+        }
+
+        .mermaid text {
+            fill: var(--mermaid-text) !important;
+        }
+
+        .mermaid .edge {
+            stroke: var(--mermaid-text) !important;
         }
 
         body.dark {
             --background-color: #292A2F;
             --text-color: #f5f5f7;
             --primary-color: #1696E6;
+
+            /* Mermaid specific colors for dark mode */
+            --mermaid-bg: #292A2F;
+            --mermaid-text: #ffffff;
+            --mermaid-border: #3f3f3f;
+            --mermaid-alt-bg: #1d1d1f;
         }
 
         .theme-toggle {
@@ -185,7 +178,6 @@
     {{ content }}
 </div>
 <script>
-    // Handle dark mode toggle and persistence in localStorage
     const toggleButton = document.getElementById('theme-toggle');
     const isDarkMode = localStorage.getItem('theme') === 'dark';
     if (isDarkMode) document.body.classList.add('dark');
