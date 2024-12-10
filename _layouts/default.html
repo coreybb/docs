@@ -39,7 +39,6 @@
                 fontSize: 16,
                 themeVariables: {
                     ...theme,
-                    // Common settings that don't change with theme
                     'fontFamily': '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif',
                     'fontSize': '16px',
                     'labelBorder': theme.primaryBorderColor,
@@ -56,23 +55,29 @@
             });
         }
 
-        // Initial setup
-        updateMermaidConfig(document.body.classList.contains('dark'));
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleButton = document.getElementById('theme-toggle');
+            const isDarkMode = localStorage.getItem('theme') === 'dark';
 
-        // Update Mermaid when theme changes
-        const toggleButton = document.getElementById('theme-toggle');
-        const isDarkMode = localStorage.getItem('theme') === 'dark';
-        if (isDarkMode) document.body.classList.add('dark');
+            // Initial setup
+            if (isDarkMode) {
+                document.body.classList.add('dark');
+            }
+            updateMermaidConfig(isDarkMode);
 
-        toggleButton.addEventListener('click', () => {
-            document.body.classList.toggle('dark');
-            const isDark = document.body.classList.contains('dark');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            updateMermaidConfig(isDark);
-            // Force re-render all diagrams
-            document.querySelectorAll('.mermaid').forEach(element => {
-                const content = element.innerHTML;
-                element.innerHTML = content;
+            // Single theme toggle handler
+            toggleButton.addEventListener('click', () => {
+                document.body.classList.toggle('dark');
+                const isDark = document.body.classList.contains('dark');
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+
+                // Update Mermaid config and re-render
+                updateMermaidConfig(isDark);
+                document.querySelectorAll('.mermaid').forEach(element => {
+                    const content = element.innerHTML;
+                    element.innerHTML = content;
+                });
             });
         });
     </script>
