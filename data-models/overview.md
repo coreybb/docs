@@ -10,15 +10,17 @@ Our application is built around three core models that work together to provide 
 <div class="model-grid">
     <div class="model-card">
         <h2>📁 Case</h2>
-        <p>A comprehensive medical record container that tracks:</p>
+        <p>A veterinary patient encounter that contains:</p>
         <ul>
-            <li>Multiple content types (records, emails, images, PDFs, recordings, summaries)</li>
-            <li>Collaborative features for real-time recording and sharing</li>
-            <li>Team visibility and access controls</li>
-            <li>Version tracking (appVersion)</li>
-            <li>Complete audit trail (creation, modification, ownership)</li>
+            <li>Medical documentation (SOAP notes, records, recordings)</li>
+            <li>Content generation through templates</li>
+            <li>Team-based access controls for clinical staff</li>
+            <li>Multi-language support for medical documentation</li>
+            <li>Medical information flagging and tracking</li>
+            <li>Complete audit trail of all documentation and changes</li>
         </ul>
     </div>
+
 
     <div class="model-card">
         <h2>👤 User</h2>
