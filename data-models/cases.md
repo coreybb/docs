@@ -1,5 +1,5 @@
 ---
-title: Cases Document Model
+title: Case Document Model
 layout: default
 ---
 

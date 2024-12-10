@@ -7,5 +7,8 @@ The main container for all content and activity.
 ### User
 [Model](user.md)
 
+### Template
+[Model](template.md)
+
 [Back to Home](../index.md)
 
