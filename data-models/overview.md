@@ -21,10 +21,9 @@ Our application is built around three core models that work together to provide 
         </ul>
     </div>
 
-
     <div class="model-card">
         <h2>👤 User</h2>
-        <p>Represents veterinary professionals and staff members. Contains authentication, preferences, and practice-specific settings.</p>
+        <p>Represents veterinary professionals and staff members. Contains preferences and practice-specific settings.</p>
         <a href="user" class="model-link">View User Model →</a>
     </div>
 
