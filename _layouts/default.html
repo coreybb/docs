@@ -6,45 +6,74 @@
     <title>{{ site.title }} | {{ page.title }}</title>
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <script>
-        mermaid.initialize({
-            startOnLoad: true,
-            theme: 'neutral',
-            fontSize: 16,
-            themeVariables: {
-                // Main colors
-                'primaryColor': '#f0f0f0',           // Changed to match window background
+        function updateMermaidConfig(isDark) {
+            const theme = isDark ? {
+                // Dark theme colors
+                'primaryColor': '#292A2F',
+                'primaryTextColor': '#f5f5f7',
+                'primaryBorderColor': '#3f3f3f',
+                'lineColor': '#86868b',
+                'mainBkg': '#292A2F',
+                'nodeBkg': '#292A2F',
+                'clusterBkg': '#292A2F',
+                'labelBackground': '#292A2F',
+                'attributeBackgroundColorOdd': '#292A2F',
+                'attributeBackgroundColorEven': '#1d1d1f',
+            } : {
+                // Light theme colors
+                'primaryColor': '#f0f0f0',
                 'primaryTextColor': '#1d1d1f',
                 'primaryBorderColor': '#e5e5e7',
                 'lineColor': '#86868b',
+                'mainBkg': '#f0f0f0',
+                'nodeBkg': '#f0f0f0',
+                'clusterBkg': '#f0f0f0',
+                'labelBackground': '#f0f0f0',
+                'attributeBackgroundColorOdd': '#f0f0f0',
+                'attributeBackgroundColorEven': '#ffffff',
+            };
 
-                // Entity boxes
-                'nodeBorder': '1px',
-                'mainBkg': '#f0f0f0',               // Changed to match window background
-                'nodeBkg': '#f0f0f0',               // Changed to match window background
-                'clusterBkg': '#f0f0f0',            // Changed to match window background
-                'clusterBorder': '#e5e5e7',
-
-                // Typography
-                'fontFamily': '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif',
-                'fontSize': '16px',
-
-                // Relationships
-                'labelBackground': '#f0f0f0',       // Changed to match window background
-                'labelBorder': '#e5e5e7',
-                'labelTextColor': '#1d1d1f',
-
-                // Attributes
-                'attributeBackgroundColorOdd': '#f0f0f0',  // Changed to match window background
-                'attributeBackgroundColorEven': '#ffffff',  // Keep white for contrast
-            },
-            er: {
-                useMaxWidth: true,
-                entityPadding: 15,
-                stroke: '#86868b',
-                fill: '#f0f0f0',                    // Changed to match window background
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: 'neutral',
                 fontSize: 16,
-                labelBackground: '#f0f0f0'          // Changed to match window background
-            }
+                themeVariables: {
+                    ...theme,
+                    // Common settings that don't change with theme
+                    'fontFamily': '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif',
+                    'fontSize': '16px',
+                    'labelBorder': theme.primaryBorderColor,
+                    'labelTextColor': theme.primaryTextColor,
+                },
+                er: {
+                    useMaxWidth: true,
+                    entityPadding: 15,
+                    stroke: '#86868b',
+                    fill: theme.mainBkg,
+                    fontSize: 16,
+                    labelBackground: theme.mainBkg
+                }
+            });
+        }
+
+        // Initial setup
+        updateMermaidConfig(document.body.classList.contains('dark'));
+
+        // Update Mermaid when theme changes
+        const toggleButton = document.getElementById('theme-toggle');
+        const isDarkMode = localStorage.getItem('theme') === 'dark';
+        if (isDarkMode) document.body.classList.add('dark');
+
+        toggleButton.addEventListener('click', () => {
+            document.body.classList.toggle('dark');
+            const isDark = document.body.classList.contains('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            updateMermaidConfig(isDark);
+            // Force re-render all diagrams
+            document.querySelectorAll('.mermaid').forEach(element => {
+                const content = element.innerHTML;
+                element.innerHTML = content;
+            });
         });
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
