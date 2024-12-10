@@ -1,7 +1,5 @@
 # Data Models
 
-## Core Models
-
 ### Case
 The main container for all content and activity. 
 [Model](cases.md).

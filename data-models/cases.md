@@ -1,15 +1,7 @@
 ---
-title: Firestore Cases Model
+title: Cases Document Model
 layout: default
 ---
-
-# Firestore Cases Model
-
-This document provides a detailed overview of the `cases` collection, its fields, subcollections, and related entities.
-
----
-
-## Full Entity-Relationship Diagram
 
 <div class="mermaid">
 erDiagram
