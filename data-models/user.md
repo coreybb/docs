@@ -4,128 +4,128 @@ layout: default
 ---
 
 <div class="mermaid">
-classDiagram
-    class User {
-        +String uid
-        +String customerID
-        +String display_name
-        +String email
-        +String firstName
-        +String lastName
-        +DateTime created_time
-        +Boolean enableSnippets
-        +Boolean firstAccountLoginCompleted
-        +Boolean isTrial
-        +String photo_url
-        +Number recordCount
-        +String subscriptionType
-        +DateTime subscriptionExpirationDate
-        +Boolean welcomeEmailSent
+erDiagram
+    User {
+        string uid
+        string customerID
+        string display_name
+        string email
+        string firstName
+        string lastName
+        datetime created_time
+        boolean enableSnippets
+        boolean firstAccountLoginCompleted
+        boolean isTrial
+        string photo_url
+        number recordCount
+        string subscriptionType
+        datetime subscriptionExpirationDate
+        boolean welcomeEmailSent
     }
 
-    class Abbreviations {
-        +Array abbreviations[*]
-        +Array categories[*]
-        +Boolean enabled
+    Abbreviations {
+        array abbreviations
+        array categories
+        boolean enabled
     }
 
-    class AbbreviationEntry {
-        +String abbreviation
-        +String category
-        +Boolean clientFacing
-        +String languageCode
-        +String longForm
+    AbbreviationEntry {
+        string abbreviation
+        string category
+        boolean clientFacing
+        string languageCode
+        string longForm
     }
 
-    class Category {
-        +String id
-        +String languageCode
-        +String name
+    Category {
+        string id
+        string languageCode
+        string name
     }
 
-    class LanguagePreferences {
-        +String appLanguage
-        +Array regionPreferences
+    LanguagePreferences {
+        string appLanguage
+        array regionPreferences
     }
 
-    class OnboardingPreferences {
-        +Object profileDefaultNormals
-        +Number profileDetailLevelPreference
-        +Array profileInterest
-        +String profileName
-        +String profileRole
-        +Array profileSpecies
-        +Object profileUnits
+    OnboardingPreferences {
+        object profileDefaultNormals
+        number profileDetailLevelPreference
+        array profileInterest
+        string profileName
+        string profileRole
+        array profileSpecies
+        object profileUnits
     }
 
-    class PDFPreferences {
-        +String email
-        +Boolean showCustomHeader
-        +Boolean showEmail
-        +Boolean showHospitalName
-        +Boolean showLogo
-        +Boolean showName
-        +Boolean showNumberPages
-        +Boolean showPhone
+    PDFPreferences {
+        string email
+        boolean showCustomHeader
+        boolean showEmail
+        boolean showHospitalName
+        boolean showLogo
+        boolean showName
+        boolean showNumberPages
+        boolean showPhone
     }
 
-    class RecordingSettings {
-        +Number maxRecordingTimeLimit
-        +Boolean soundOnStartAndStopEnabled
+    RecordingSettings {
+        number maxRecordingTimeLimit
+        boolean soundOnStartAndStopEnabled
     }
 
-    class TeamData {
-        +Array allUsersInTeamsUserIsIn
-        +Array canManageTeams
-        +Array canSupportTeamRefs
-        +Array canSupportTeams
-        +Array isMemberOfTeams
-        +Array openInvites
-        +Array ownsTeams
+    TeamData {
+        array allUsersInTeamsUserIsIn
+        array canManageTeams
+        array canSupportTeamRefs
+        array canSupportTeams
+        array isMemberOfTeams
+        array openInvites
+        array ownsTeams
     }
 
-    class PersonalTag {
-        +DateTime createdDate
-        +Boolean isStandard
-        +Array name
-        +Reference standardRef
-        +Array templates
+    PersonalTag {
+        datetime createdDate
+        boolean isStandard
+        array name
+        ref standardRef
+        array templates
     }
 
-    class PersonalTemplate {
-        +Boolean boldAbnormals
-        +DateTime createdDate
-        +String description
-        +Boolean hasUpdatedAdvancedTemplate
-        +Boolean isFavorite
-        +Boolean isStandard
-        +Boolean isVisible
-        +String languageCode
-        +String name
-        +Number order
-        +Object properties
-        +Reference standardRef
-        +String subtype
-        +Array tags
-        +String type
+    PersonalTemplate {
+        boolean boldAbnormals
+        datetime createdDate
+        string description
+        boolean hasUpdatedAdvancedTemplate
+        boolean isFavorite
+        boolean isStandard
+        boolean isVisible
+        string languageCode
+        string name
+        number order
+        object properties
+        ref standardRef
+        string subtype
+        array tags
+        string type
     }
 
-    class TemplateProperties {
-        +Array applicableInterests
-        +Array applicableSpecies
-        +Boolean usesMedicalAbbreviations
+    TemplateProperties {
+        array applicableInterests
+        array applicableSpecies
+        boolean usesMedicalAbbreviations
     }
 
-    User *-- Abbreviations
-    User *-- LanguagePreferences
-    User *-- OnboardingPreferences
-    User *-- PDFPreferences
-    User *-- RecordingSettings
-    User *-- TeamData
-    User "1" *-- "many" PersonalTag
-    User "1" *-- "many" PersonalTemplate
-    PersonalTemplate *-- TemplateProperties
-    Abbreviations *-- "many" AbbreviationEntry
-    Abbreviations *-- "many" Category
+    User ||--|| Abbreviations : "has"
+    User ||--|| LanguagePreferences : "has"
+    User ||--|| OnboardingPreferences : "has"
+    User ||--|| PDFPreferences : "has"
+    User ||--|| RecordingSettings : "has"
+    User ||--|| TeamData : "has"
+    User ||--o{ PersonalTag : "contains"
+    User ||--o{ PersonalTemplate : "contains"
+    PersonalTemplate ||--|| TemplateProperties : "has"
+    Abbreviations ||--o{ AbbreviationEntry : "contains"
+    Abbreviations ||--o{ Category : "contains"
 
 </div>
