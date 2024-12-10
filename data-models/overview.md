@@ -10,8 +10,14 @@ Our application is built around three core models that work together to provide 
 <div class="model-grid">
     <div class="model-card">
         <h2>📁 Case</h2>
-        <p>The primary container for all content and clinical activity. Cases organize patient records, communications, and medical documentation.</p>
-        <a href="cases" class="model-link">View Case Model →</a>
+        <p>A comprehensive medical record container that tracks:</p>
+        <ul>
+            <li>Multiple content types (records, emails, images, PDFs, recordings, summaries)</li>
+            <li>Collaborative features for real-time recording and sharing</li>
+            <li>Team visibility and access controls</li>
+            <li>Version tracking (appVersion)</li>
+            <li>Complete audit trail (creation, modification, ownership)</li>
+        </ul>
     </div>
 
     <div class="model-card">
